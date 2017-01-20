@@ -21,34 +21,34 @@ def login():
 @app.route('/register',methods=['GET','POST'])
 def register():
   if request.method=='POST':
-     try:
-        _id=request.form["userID"]
-        _password=request.form["pass"]
+    try:
+      _id=request.form["userID"]
+      _password=request.form["pass"]
 
-        if _id and _password:
+      if _id and _password:
 
-            conn=mysql.connect()
-            cursor = conn.cursor()
-            cursor.callproc('sp_createUser', (_id,_password))
-            data = cursor.fetchall()
+        conn=mysql.connect()
+        cursor = conn.cursor()
+        cursor.callproc('sp_createUser', (_id,_password))
+        data = cursor.fetchall()
 
-            if len(data) is 0:
-              conn.commit()
-              cursor.execute('''INSERT INTO tbl_user(user_id,user_password) VALUES (%s,%s)''', (_id, _password))
-              return json.dumps({'message': 'User created successfully !'})
-            else:
-              return json.dumps({'error': str(data[0])})
+        if len(data) is 0:
+          conn.commit()
+          cursor.execute('''INSERT INTO tbl_user(user_id,user_password) VALUES (%s,%s)''', (_id, _password))
+          return json.dumps({'message': 'User created successfully !'})
+        else:
+          return json.dumps({'error': str(data[0])})
 
-         else:
-              return json.dumps({'html': '<span>Enter the required fields</span>'})
+      else:
+        return json.dumps({'html': '<span>Enter the required fields</span>'})
 
-     except Exception as e:
-         return json.dumps({'error': str(e)})
+    except Exception as e:
+      return json.dumps({'error': str(e)})
 
 
-     finally:
-        cursor.close()
-        conn.close()
+    finally:
+      cursor.close()
+      conn.close()
   return render_template('register.html')
 
 
