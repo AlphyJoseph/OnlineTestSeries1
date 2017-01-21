@@ -1,7 +1,8 @@
 from flask import Flask,render_template,request,session,json
-from flask.ext.mysql import MySQL
-
+from flaskext.mysql import MySQL
 mysql = MySQL()
+
+
 app = Flask(__name__)
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_DB'] = 'onlinetestseries'
