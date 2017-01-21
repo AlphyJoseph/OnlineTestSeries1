@@ -5,7 +5,7 @@ mysql = MySQL()
 
 app = Flask(__name__)
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_DB'] = 'onlinetestseries'
+app.config['MYSQL_DATABASE_DB'] = 'OnlineTestSeries'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 
@@ -30,12 +30,12 @@ def register():
 
         conn=mysql.connect()
         cursor = conn.cursor()
-        cursor.callproc('sp_createUser', (_id,_password))
+        cursor.callproc('sp_createUser1', (_id,_password))
         data = cursor.fetchall()
 
         if len(data) is 0:
           conn.commit()
-          cursor.execute('''INSERT INTO tbl_user(user_id,user_password) VALUES (%s,%s)''', (_id, _password))
+          
           return json.dumps({'message': 'User created successfully !'})
         else:
           return json.dumps({'error': str(data[0])})
