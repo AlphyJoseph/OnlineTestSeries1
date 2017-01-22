@@ -1,5 +1,6 @@
 from flask import Flask,render_template,request,session,json
 from flaskext.mysql import MySQL
+from werkzeug import generate_password_hash, check_password_hash
 mysql = MySQL()
 
 
@@ -25,17 +26,17 @@ def register():
     try:
       _id=request.form["userID"]
       _password=request.form["pass"]
+      _hashed_password = generate_password_hash(_password)
 
       if _id and _password:
 
         conn=mysql.connect()
         cursor = conn.cursor()
-        cursor.callproc('sp_createUser1', (_id,_password))
+        cursor.callproc('sp_createUser1', (_id,_hashed_password))
         data = cursor.fetchall()
 
         if len(data) is 0:
           conn.commit()
-          
           return json.dumps({'message': 'User created successfully !'})
         else:
           return json.dumps({'error': str(data[0])})
