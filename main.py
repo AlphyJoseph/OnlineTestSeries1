@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,session,json,redirect,flash
+from flask import Flask,render_template,request,session,json,redirect,flash,url_for
 from flaskext.mysql import MySQL
 from werkzeug import generate_password_hash, check_password_hash
 mysql = MySQL()
@@ -39,14 +39,18 @@ def register():
 
         if len(data) is 0:
           conn.commit()
-          flash("User Created Successfully")
-          return render_template("")
+          flash('User Created Successfully')
+          return render_template('')
          # return json.dumps({'message': 'User created successfully !'})
         else:
-          return json.dumps({'error': str(data[0])})
+        	flash('Error! User already exixts!')
+        	return redirect(url_for('login'))
+          #return json.dumps({'error': str(data[0])})
 
       else:
-        return json.dumps({'html': '<span>Enter the required fields</span>'})
+      		flash('Enter required fields')
+      		return redirect(url_for('register'))
+       # return json.dumps({'html': '<span>Enter the required fields</span>'})
 
     
 
