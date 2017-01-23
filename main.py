@@ -14,7 +14,7 @@ app.secret_key="mySecret"
 @app.route('/')
 def index():
     if 'username' in session:
-        return ""
+        return render_template('LIST.html')
     return render_template('index.html')
 
 
@@ -40,7 +40,7 @@ def register():
         if len(data) is 0:
           conn.commit()
           flash('User Created Successfully')
-          return render_template('')
+          return render_template('LIST.html')
          # return json.dumps({'message': 'User created successfully !'})
         else:
         	flash('Error! User already exixts!')
