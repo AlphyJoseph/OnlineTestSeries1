@@ -43,6 +43,16 @@
 </head>
 <body>
 
+{% with messages = get_flashed_messages() %}
+         {% if messages %}
+               {% for message in messages %}
+               <h1><{{ message }}</h1>
+               {% endfor %}
+         {% endif %}
+      {% endwith %}
+
+    
+
 
 <div class="dropdown">
 <button onclick="myFunction()" class="dropbtn">CHOOSE SEMESTER</button>

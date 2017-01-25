@@ -1,19 +1,14 @@
 from flask import Flask,render_template,request,session,json,redirect,flash,url_for
-from flaskext.mysql import MySQL
+import sqlite3 as sql
 from werkzeug import generate_password_hash, check_password_hash
-mysql = MySQL()
 
 
 app = Flask(__name__)
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_DB'] = 'OnlineTestSeries'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-mysql.init_app(app)
 app.secret_key="mySecret"
 
 @app.route('/')
 def index():
-    if 'username' in session:
+    if 'userID' in session:
         return render_template('LIST.html')
     return render_template('index.html')
 
@@ -32,30 +27,30 @@ def register():
 
       if _id and _password:
 
-        conn=mysql.connect()
-        cursor = conn.cursor()
-        cursor.callproc('sp_createUser1', (_id,_hashed_password))
-        data = cursor.fetchall()
+        con = sql.connect("OnlineTestSeries.db")
+      cur = con.cursor()
+      cur.execute("SELECT USN from Users")
+      data=cur.fetchall()
+      for USN in data:
+        if(USN==_id):
+          flash('User already exixts! Please Login')
+          break
+          return redirect(url_for('login'))
 
-        if len(data) is 0:
-          conn.commit()
-          flash('User Created Successfully')
-          return render_template('LIST.html')
-         # return json.dumps({'message': 'User created successfully !'})
+       
         else:
-        	flash('Error! User already exixts!')
-        	return redirect(url_for('login'))
-          #return json.dumps({'error': str(data[0])})
-
+          cur.execute("INSERT INTO Users(USN,password) VALUES(?,?)",(_id,_hashed_password))
+          con.commit()
+          flash('User Created Successfully')
+          break
+          return render_template('LIST.html')
+         
+        
       else:
-      		flash('Enter required fields')
-      		return redirect(url_for('register'))
-       # return json.dumps({'html': '<span>Enter the required fields</span>'})
-
-    
-
-      cursor.close()
-      conn.close()
+          flash('Enter required fields')
+          return redirect(url_for('register'))
+     
+      con.close()
   return render_template('register.html')
 
 
