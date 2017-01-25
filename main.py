@@ -21,39 +21,32 @@ def login():
 def register():
   if request.method=='POST':
 
-      _id=request.form["userID"]
-      _password=request.form["pass"]
-      _hashed_password = generate_password_hash(_password)
+    _id=request.form["userID"]
+    _password=request.form["pass"]
+    _hashed_password = generate_password_hash(_password)
+    con = sql.connect("onlinetestseries.db")
 
-      if _id and _password:
-
-        con = sql.connect("OnlineTestSeries.db")
-      cur = con.cursor()
-      cur.execute("SELECT USN from Users")
-      data=cur.fetchall()
-      for USN in data:
-        if(USN==_id):
+    if _id and _password:
+      cur = con.execute("SELECT USN from USERS")
+      for USN in cur:
+        print USN[0]
+        if(USN[0] == _id):
           flash('User already exixts! Please Login')
-          break
+          con.close()
           return redirect(url_for('login'))
 
-       
-        else:
-          cur.execute("INSERT INTO Users(USN,password) VALUES(?,?)",(_id,_hashed_password))
-          con.commit()
-          flash('User Created Successfully')
-          break
-          return render_template('LIST.html')
-         
-        
-      else:
-          flash('Enter required fields')
-          return redirect(url_for('register'))
-     
+      con.execute("INSERT INTO USERS VALUES(?,?)",(_id,_hashed_password))
+      con.commit()
       con.close()
+      flash('User Created Successfully')
+      return render_template('LIST.html')
+    else:
+        flash('Enter required fields')
+        return redirect(url_for('register'))
+   
   return render_template('register.html')
 
 
 if __name__ == '__main__':
     
-    app.run(debug=True)
+    app.run(debug=True, threaded=True)
