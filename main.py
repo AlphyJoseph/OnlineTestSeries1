@@ -36,9 +36,10 @@ def register():
           return redirect(url_for('login'))
 
       con.execute("INSERT INTO USERS VALUES(?,?)",(_id,_hashed_password))
+      
+      flash('User Created Successfully')
       con.commit()
       con.close()
-      flash('User Created Successfully')
       return render_template('LIST.html')
     else:
         flash('Enter required fields')
