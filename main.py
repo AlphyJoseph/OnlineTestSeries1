@@ -12,7 +12,10 @@ def index():
         return render_template('LIST.html')
     return render_template('index.html')
 
-
+@app.route('/home')
+def home():
+  return render_template('LIST.html')
+  
 @app.route('/login')
 def login():
     return render_template('index.html')
@@ -34,13 +37,13 @@ def register():
           flash('User already exixts! Please Login')
           con.close()
           return redirect(url_for('login'))
-
-      con.execute("INSERT INTO USERS VALUES(?,?)",(_id,_hashed_password))
-      
-      flash('User Created Successfully')
-      con.commit()
-      con.close()
-      return render_template('LIST.html')
+        
+        con.execute("INSERT INTO USERS VALUES(?,?)",(_id,_hashed_password))
+        con.commit()
+        flash('User Created Successfully')
+        con.close()
+        return redirect(url_for('home'))
+        
     else:
         flash('Enter required fields')
         return redirect(url_for('register'))
