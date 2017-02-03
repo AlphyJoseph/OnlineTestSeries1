@@ -46,7 +46,7 @@ def login():
 		if result:
 			session['logged_in'] = True
 		else:
-			flash('Invalid Credentials')
+			flash('Invalid Credentials....Please register and proceed to Login')
 	return redirect(url_for('home'))
 
 @app.route('/registerScreen')
@@ -70,13 +70,13 @@ def register():
 		result = query.first()
 
 		if result:
-			flash('User Exists')
+			flash('User already exists! Please login')
 		else:
 			hash_password = hashlib.sha512(PASSWORD).hexdigest()
 			user = User(USN,hash_password)
 			DBsession.add(user)
 			DBsession.commit()
-			flash('User Added')
+			flash('User Registration Successful!')
 	return render_template('index.html')
 
 #Logs user out
