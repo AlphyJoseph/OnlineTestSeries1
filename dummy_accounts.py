@@ -14,8 +14,8 @@ session = Session()
 
 
 #######################	One dummy user
-dummyPassword = "root"
-dummyUSN = "root"
+dummyPassword = "al"
+dummyUSN = "abc123"
 
 hashed_password = hashlib.sha512(dummyPassword).hexdigest()
 user = User(dummyUSN, hashed_password)
@@ -23,4 +23,5 @@ session.add(user)
 #####################################33
  
 # commit the record the database
+session.commit()
 session.commit()

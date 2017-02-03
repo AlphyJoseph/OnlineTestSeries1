@@ -1,2 +1,3 @@
 flask
-flask-mysql
+sqlite3
+flask-SqlAlchemy
