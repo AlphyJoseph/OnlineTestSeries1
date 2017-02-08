@@ -20,10 +20,7 @@
 
 <body>
 {% block body %}
-{% if session['logged_in'] %}
-<div align="right" style="width:300px"><a href="{{url_for('logout')}}" float="right" style="width:100%;background:#f1f1f1;">Logout</a></div>
 
-{% endif %}
 {% endblock %}
  
 
