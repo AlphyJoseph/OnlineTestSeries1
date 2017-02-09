@@ -14,12 +14,23 @@
     <title>Login</title>
 
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
-    {% block headStyle %} {% endblock %}
+    {% block head %} {% endblock %} 
 
 </head>
 
 <body>
 {% block body %}
+<style type="text/css">
+  #footer {
+    position : absolute;
+    bottom : 0;
+  }
+</style>
+
+
+<div id="footer" style="width:300px;height:100px"><a href="{{url_for('logout')}}" style="width:100%;background:#f1f1f1;">Logout</a></div>
+
+
 
 {% endblock %}
  
