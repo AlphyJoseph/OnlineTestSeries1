@@ -21,18 +21,20 @@ def index():
 	else:
 		return render_template('LIST.html')
 
-@app.route('/home', methods=['POST'])
+@app.route('/homeScreen')
 def home():
-	if not session.get('logged_in'):
-		return render_template('index.html')
-	else:
-		return render_template('LIST.html')
-      if request.method=='POST':
-        POST_SEM = str(request.form['sem'])
+  if not session.get('logged_in'):
+    return render_template('index.html')
+  else:
+    return render_template('LIST.html')
 
+@app.route('/home', methods=['POST'])
+  if request.method == 'POST' :
+    POST_SEM = str(request.form['sem'])
 
+    DBsession = Session()
+    query =
         
-  
 @app.route('/login', methods=['POST'])
 def login():
 	print "In login"
