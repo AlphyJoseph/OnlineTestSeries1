@@ -14,13 +14,8 @@ session = Session()
 
 
 #######################	One dummy user
-dummyPassword = "al"
-dummyUSN = "abc123"
-
-hashed_password = hashlib.sha512(dummyPassword).hexdigest()
-user = User(dummyUSN, hashed_password)
-
-session.add(user)
+semes = semester(2,'Physics,Electrical,Civil')
+session.add(semes)
 #####################################33
  
 # commit the record the database

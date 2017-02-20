@@ -54,7 +54,7 @@ def login():
 			session['logged_in'] = True
 		else:
 			flash('Invalid Credentials....Please register and proceed to Login')
-	return redirect(url_for('home'))
+	return redirect(url_for('homeScreen'))
 
 @app.route('/registerScreen')
 def registerScreen():

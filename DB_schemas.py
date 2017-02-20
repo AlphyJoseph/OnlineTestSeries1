@@ -26,11 +26,20 @@ class User(Base):
 
 ##  Add other Table schemas as Classes
 #   Refer above (User) schema
+class semester(Base):
+	""""""
+	__tablename__ = "sem_subjects"
+
+	sem = Column(Integer, primary_key=True)
+	subjects = Column(String)
 
 
+	def __init__(self, sem, subjects):
 
+		self.sem = sem
+		self.subjects = subjects
 
-
+		
 ########################################################################
 #   *** Do not change the below line ***
 # create tables
