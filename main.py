@@ -33,7 +33,11 @@ def home():
     POST_SEM = str(request.form['sem'])
 
     DBsession = Session()
-    query =
+    subs = DBsession.query(semester).filter(semester.sem.in_([POST_SEM]))
+    result = subs.first()
+
+    if result:
+      return
         
 @app.route('/login', methods=['POST'])
 def login():
