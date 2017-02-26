@@ -1,5 +1,5 @@
 from flask import Flask,render_template,request,session,json,redirect,flash,url_for
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker,load_only
 from DB_schemas  import *
 import hashlib, uuid
 import os
@@ -33,11 +33,12 @@ def home():
     POST_SEM = str(request.form['sem'])
 
     DBsession = Session()
-    subs = DBsession.query(semester).filter(semester.sem.in_([POST_SEM]))
+    subs = DBsession.query(semester).filter(semester.sem.in_([POST_SEM])).options(load_only("subjects"))
     result = subs.first()
 
     if result:
-      return
+      subjects = subs.split(',')
+      return render_template('subjects.html',subjects=subjects)
         
 @app.route('/login', methods=['POST'])
 def login():
