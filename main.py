@@ -21,24 +21,7 @@ def index():
 	else:
 		return render_template('LIST.html')
 
-@app.route('/homeScreen')
-def home():
-  if not session.get('logged_in'):
-    return render_template('index.html')
-  else:
-    return render_template('LIST.html')
-
-@app.route('/home', methods=['POST'])
-  if request.method == 'POST' :
-    POST_SEM = str(request.form['sem'])
-
-    DBsession = Session()
-    subs = DBsession.query(semester).filter(semester.sem.in_([POST_SEM])).options(load_only("subjects"))
-    result = subs.first()
-
-    if result:
-      subjects = subs.split(',')
-      return render_template('subjects.html',subjects=subjects)
+###################################################################################################
         
 @app.route('/login', methods=['POST'])
 def login():
@@ -59,7 +42,34 @@ def login():
 			session['logged_in'] = True
 		else:
 			flash('Invalid Credentials....Please register and proceed to Login')
-	return redirect(url_for('homeScreen'))
+	return redirect(url_for('hScreen'))
+
+########################################################################################################
+@app.route('/hScreen')
+def home():
+  if not session.get('logged_in'):
+    return render_template('index.html')
+  else:
+    return render_template('LIST.html')
+
+#########################################################################################################
+
+@app.route('/home', methods=['POST'])
+def semester():
+  if request.method == 'POST' :
+    POST_SEM = str(request.form['sem'])
+
+    DBsession = Session()
+    subs = DBsession.query(semester).filter(semester.sem.in_([POST_SEM])).options(load_only("subjects"))
+    link = DBsession.query(semester).filter(semester.sem.in_([POST_SEM])).options(load_only("links"))
+    result1 = subs.first()
+    result2 = link.first()
+
+    if result1 and result2:
+      subjects = subs.split(',')
+      sub_link = link.split(',')
+      return render_template('subjects.html',subs_links=zip(subjects,sub_link))
+  ####################################################################################################
 
 @app.route('/registerScreen')
 def registerScreen():
@@ -67,6 +77,8 @@ def registerScreen():
 		return render_template('register.html')
 	else:
 		return render_template('LIST.html')
+
+######################################################################################################
 
 @app.route('/register',methods=['GET','POST'])
 def register():
@@ -91,7 +103,7 @@ def register():
 			flash('User Registration Successful!')
 	return render_template('index.html')
 
-#Logs user out
+#####################################################################################Logs user out
 @app.route("/logout")
 def logout():
     session['logged_in'] = False

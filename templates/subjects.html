@@ -1,6 +1,6 @@
 { % extends "layout.html" % }
 { % block body % }
 <h1>SUBJECTS</h1>
-{ % for sub in subjects % }
-<strong>1</strong>{{sub.subjects}}<br>
+{ % for sub, lin in subs_links % }
+<strong>1</strong><a href={{lin}}>{{sub}}</a><br>
 { % endblock % }

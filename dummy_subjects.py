@@ -14,7 +14,7 @@ session = Session()
 
 
 #######################	One dummy user
-semes = semester(2,'Physics,Electrical,Civil')
+semes = semester(2,'Physics,Electrical,Civil','{{url_for(phy)}},{{url_for(ele)}},{{url_for(civ)}}')
 session.add(semes)
 #####################################33
  
