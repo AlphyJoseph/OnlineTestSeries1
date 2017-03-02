@@ -4,7 +4,7 @@ from sqlalchemy import Column, Date, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
  
-engine = create_engine('sqlite:///onlineTestSeries.db', echo=False)
+engine = create_engine('sqlite:///onlineTestSeries.db', echo=True)
 Base = declarative_base()
  
 ########################################################################
@@ -26,20 +26,19 @@ class User(Base):
 
 ##  Add other Table schemas as Classes
 #   Refer above (User) schema
-class semester(Base):
+class Semester(Base):
 	""""""
 	__tablename__ = "sem_subjects"
 
 	sem = Column(Integer, primary_key=True)
 	subjects = Column(String)
-    links = Column(String)
+	links = Column(String)
 
 
 	def __init__(self, sem, subjects, links):
-
 		self.sem = sem
 		self.subjects = subjects
-        self.links = links
+		self.links = links
 
 		
 ########################################################################
