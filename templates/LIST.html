@@ -38,8 +38,9 @@
 
 {% block body %}
 <div class="dropdown">
-<form method="POST" action="{{ url_for('home') }}">
+
 <button onclick="myFunction()" class="dropbtn">CHOOSE SEMESTER</button>
+<form method="POST" action="{{ url_for('home') }}">
   <div id="myDropdown" class="dropdown-content">
      <li><select name="sem">
   <option value="I SEMESTER">I SEMESTER</option>
@@ -55,10 +56,7 @@
 </li>
   </div>
 </div>
-<ul id="buttons">
-    <li><a href="#">General</a></li>
-    <li><a href="#">Subjectwise</a></li>
-</ul>
+
 
 <script>
 /* When the user clicks on the button, 
