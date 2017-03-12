@@ -69,7 +69,19 @@ def semester():
       subjects = subs.split(',')
       sub_link = link.split(',')
       return render_template('subjects.html',subs_links=zip(subjects,sub_link))
-  ####################################################################################################
+
+####################################################################################################
+
+@app.route('/chosenSemester/<int:sem>')
+def chosenSemester(sem):
+	if not session.get('logged_in'):
+		return render_template('register.html')
+	else:
+		print sem
+		return render_template('LIST.html',sem=sem)
+
+
+####################################################################################################
 
 @app.route('/registerScreen')
 def registerScreen():

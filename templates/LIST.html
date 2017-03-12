@@ -38,21 +38,20 @@
 
 {% block body %}
 <div class="dropdown">
-<form method="POST" action="{{ url_for('home') }}">
+
 <button onclick="myFunction()" class="dropbtn">CHOOSE SEMESTER</button>
+
   <div id="myDropdown" class="dropdown-content">
-     <li><select name="sem">
-  <option value="I SEMESTER">I SEMESTER</option>
-   <option value="II SEMESTER">II SEMESTER</option>
-    <option value="III SEMESTER">III SEMESTER</option>
-     <option value="IV SEMESTER">IV SEMESTER</option>
-      <option value="V SEMESTER">V SEMESTER</option>
-       <option value="VI SEMESTER">VI SEMESTER</option>
-        <option value="VII SEMESTER">VII SEMESTER</option>
-         <option value="VIII SEMESTER">VIII SEMESTER</option>
- 
-</select>
-</li>
+     
+    <a href="/chosenSemester/1" value="I SEMESTER">I SEMESTER</a>
+    <a href="/chosenSemester/2" value="II SEMESTER">II SEMESTER</a>
+    <a href="/chosenSemester/3" value="III SEMESTER">III SEMESTER</a>
+    <a href="/chosenSemester/4" value="IV SEMESTER">IV SEMESTER</a>
+    <a href="/chosenSemester/5" value="V SEMESTER">V SEMESTER</a>
+    <a href="/chosenSemester/6" value="VI SEMESTER">VI SEMESTER</a>
+    <a href="/chosenSemester/7" value="VII SEMESTER">VII SEMESTER</a>
+    <a href="/chosenSemester/8" value="VIII SEMESTER">VIII SEMESTER</a>
+
   </div>
 </div>
 <ul id="buttons">
@@ -88,6 +87,3 @@ window.onclick = function(event) {
          {% endif %}
       {% endwith %}
 {% endblock %}
-
-</body>
-
