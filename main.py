@@ -54,22 +54,28 @@ def home():
 
 #########################################################################################################
 
-@app.route('/home', methods=['POST'])
-def semester():
-  if request.method == 'POST' :
-    POST_SEM = str(request.form['sem'])
 
-    DBsession = Session()
-    subs = DBsession.query(semester).filter(semester.sem.in_([POST_SEM])).options(load_only("subjects"))
-    link = DBsession.query(semester).filter(semester.sem.in_([POST_SEM])).options(load_only("links"))
-    result1 = subs.first()
-    result2 = link.first()
 
-    if result1 and result2:
-      subjects = subs.split(',')
-      sub_link = link.split(',')
-      return render_template('subjects.html',subs_links=zip(subjects,sub_link))
-  ####################################################################################################
+@app.route('/chosenSemester/<int:sem>')
+def chosenSemester(sem):
+  DBsession = Session()
+  subs = DBsession.query(Semester).filter(Semester.sem.in_(sem)).options(load_only("subjects"))
+  link = DBsession.query(Semester).filter(Semester.sem.in_(sem)).options(load_only("links"))
+  result1 = subs.first()
+  result2 = link.first()
+
+  if result1 and result2:
+    subjects = subs.split(',')
+    sub_link = link.split(',')
+    
+  if not session.get('logged_in'):
+	return render_template('register.html')
+  else:
+	print sem
+	return render_template('subjects.html',subs_links=zip(subjects,sub_link))
+
+
+####################################################################################################
 
 @app.route('/registerScreen')
 def registerScreen():
