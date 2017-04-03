@@ -32,13 +32,11 @@ class Semester(Base):
 
 	sem = Column(Integer, primary_key=True)
 	subjects = Column(String)
-	links = Column(String)
 
-
-	def __init__(self, sem, subjects, links):
+	def __init__(self, sem, subjects):
 		self.sem = sem
 		self.subjects = subjects
-		self.links = links
+
 
 		
 ########################################################################
