@@ -1,7 +1,10 @@
-{ % extends "layout.html" % }
-{ % block body % }
+{% extends "layout.html" %}
+
+{% block body %}
+
 <h1>SUBJECTS</h1>
 <li><a href="#">General</a></li>
-{ % for sub in subjects % }
-<strong>1</strong><a href="#">{{sub}}</a><br>
-{ % endblock % }
+{% for sub in subjects %}
+	<strong></strong><a href="#">{{sub}}</a><br>
+{% endfor %}
+{% endblock %}

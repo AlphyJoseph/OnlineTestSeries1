@@ -59,20 +59,18 @@ def home():
 @app.route('/chosenSemester/<int:sem>')
 def chosenSemester(sem):
   DBsession = Session()
-  subs = DBsession.query(Semester).filter(Semester.sem.in_(sem)).options(load_only("subjects"))
- #link = DBsession.query(Semester).filter(Semester.sem.in_(sem)).options(load_only("links"))
-  result1 = subs.first()
+  subs = DBsession.query(Semester).filter(Semester.sem.in_([sem]))
+ 	#link = DBsession.query(Semester).filter(Semester.sem.in_(sem)).options(load_only("links"))
+  subjects = subs.first()
   #result2 = link.first()
 
-  if result1: #and result2
-    subjects = subs.split(',')
-    #sub_link = link.split(',')
+  subjects_list = subjects.subjects.split(',')
+  #sub_link = link.split(',')
     
   if not session.get('logged_in'):
 	return render_template('register.html')
   else:
-	print sem
-	return render_template('subjects.html',subjects=subjects)
+	return render_template('subjects.html',subjects=subjects_list)
 
 
 ####################################################################################################

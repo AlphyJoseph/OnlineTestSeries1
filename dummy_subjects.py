@@ -14,7 +14,11 @@ session = Session()
 
 
 #######################	One dummy user
-semes = Semester(2,'Physics,Electrical,Civil','')
+semes = Semester(2,'Physics,Electrical,Civil')
+session.add(semes)
+semes = Semester(3,'adas,asda,Civil')
+session.add(semes)
+semes = Semester(4,'dfgghn,asd,Civil')
 session.add(semes)
 #####################################33
  
