@@ -5,6 +5,17 @@
 <h1>SUBJECTS</h1>
 <li><a href="#">General</a></li>
 {% for sub in subjects %}
-	<strong></strong><a href="#">{{sub}}</a><br>
+	<strong></strong><a href="/chosenSemester/{{ sem }}/{{ sub }}">{{sub}}</a><br>
 {% endfor %}
+
+{% if chosenSubject %}
+<center>{{ chosenSubject }}</center>
+{% else %}
+<center>{{ chosenSubject }}</center>
+{% endif %}
+
+
+
+<!-- Handle the questions here -->
+
 {% endblock %}

@@ -70,7 +70,24 @@ def chosenSemester(sem):
   if not session.get('logged_in'):
 	return render_template('register.html')
   else:
-	return render_template('subjects.html',subjects=subjects_list)
+	return render_template('subjects.html',subjects=subjects_list, sem = sem)
+
+#########################################################################################################
+
+@app.route('/chosenSemester/<int:sem>/<string:subject>')
+def chosenSubject(sem, subject):
+  DBsession = Session()
+  subs = DBsession.query(Semester).filter(Semester.sem.in_([sem]))
+  subjects = subs.first()
+  subjects_list = subjects.subjects.split(',')
+
+  ### Retrieve the questions here for the subject *subject* from the semester *sem* and pass it appropriately
+  ### to the template and handle it in the template
+    
+  if not session.get('logged_in'):
+	return render_template('register.html')
+  else:
+	return render_template('subjects.html',subjects=subjects_list, chosenSubject=subject, sem=sem)
 
 
 ####################################################################################################
