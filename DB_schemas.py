@@ -23,6 +23,28 @@ class User(Base):
  
 
 ########################################################################
+class Subjects(Base)
+
+	__tablename__="sub_questions"
+
+	qno = Column(Integer, primary_key=True)
+	sub = Column(String, primary_key=True)
+	que = Column(String)
+	op1 = Column(String)
+	op2 = Column(String)
+	op3 = Column(String)
+	ans = Column(String)
+
+	def __init__(self, qno, sub, que, op1, op2, op3, ans):
+
+		self.qno = qno
+		self.sub = sub
+		self.que = que
+		self.op1 = op1
+		self.op2 = op2
+		self.op3 = op3
+		self.ans = ans
+########################################################################
 
 ##  Add other Table schemas as Classes
 #   Refer above (User) schema

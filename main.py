@@ -60,12 +60,11 @@ def home():
 def chosenSemester(sem):
   DBsession = Session()
   subs = DBsession.query(Semester).filter(Semester.sem.in_([sem]))
- 	#link = DBsession.query(Semester).filter(Semester.sem.in_(sem)).options(load_only("links"))
   subjects = subs.first()
-  #result2 = link.first()
+ 
 
   subjects_list = subjects.subjects.split(',')
-  #sub_link = link.split(',')
+
     
   if not session.get('logged_in'):
 	return render_template('register.html')
@@ -76,10 +75,8 @@ def chosenSemester(sem):
 
 @app.route('/chosenSemester/<int:sem>/<string:subject>')
 def chosenSubject(sem, subject):
-  DBsession = Session()
-  subs = DBsession.query(Semester).filter(Semester.sem.in_([sem]))
-  subjects = subs.first()
-  subjects_list = subjects.subjects.split(',')
+	#f=open("")
+
 
   ### Retrieve the questions here for the subject *subject* from the semester *sem* and pass it appropriately
   ### to the template and handle it in the template
