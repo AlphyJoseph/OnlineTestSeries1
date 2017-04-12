@@ -23,7 +23,7 @@ class User(Base):
  
 
 ########################################################################
-class Subjects(Base)
+class Subjects(Base):
 
 	__tablename__="sub_questions"
 

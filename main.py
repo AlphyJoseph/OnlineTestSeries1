@@ -75,11 +75,10 @@ def chosenSemester(sem):
 
 @app.route('/chosenSemester/<int:sem>/<string:subject>')
 def chosenSubject(sem, subject):
-	#f=open("")
+	
 
 
-  ### Retrieve the questions here for the subject *subject* from the semester *sem* and pass it appropriately
-  ### to the template and handle it in the template
+  
     
   if not session.get('logged_in'):
 	return render_template('register.html')
