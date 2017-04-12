@@ -75,15 +75,17 @@ def chosenSemester(sem):
 
 @app.route('/chosenSemester/<int:sem>/<string:subject>')
 def chosenSubject(sem, subject):
-	
+	DBsession = Session()
+	quest = DBsession.query(Subjects).filter(Subjects.sub.in_([subject]))
+	questions = ques.first()
+
+	questions_list = quest.ques.op1.op2.op3
 
 
-  
-    
-  if not session.get('logged_in'):
+	if not session.get('logged_in'):
 	return render_template('register.html')
   else:
-	return render_template('subjects.html',subjects=subjects_list, chosenSubject=subject, sem=sem)
+	return render_template('subjects.html',subjects=subjects_list, chosenSubject=subject, sem=sem, questions=questions_list)
 
 
 ####################################################################################################
