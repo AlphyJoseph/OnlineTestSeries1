@@ -37,7 +37,32 @@
 {% endblock %}
 
 {% block body %}
-<div class="dropdown">
+
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="header center orange-text">Get Started</h1>
+      <div class="row center">
+      <!-- Dropdown Trigger -->
+      <a class='dropdown-button btn' href='#' data-activates='dropdown1'>Choose Semester</a>
+      </div>
+      <br><br>
+
+    </div>
+  </div>
+  
+  <!-- Dropdown Structure -->
+  <ul id='dropdown1' class='dropdown-content'>
+    <li><a href="/chosenSemester/1" value="I SEMESTER">I SEMESTER</a>
+    <li><a href="/chosenSemester/2" value="II SEMESTER">II SEMESTER</a></li>
+    <li><a href="/chosenSemester/3" value="III SEMESTER">III SEMESTER</a></li>
+    <li><a href="/chosenSemester/4" value="IV SEMESTER">IV SEMESTER</a></li>
+    <li><a href="/chosenSemester/5" value="V SEMESTER">V SEMESTER</a></li>
+    <li><a href="/chosenSemester/6" value="VI SEMESTER">VI SEMESTER</a></li>
+    <li><a href="/chosenSemester/7" value="VII SEMESTER">VII SEMESTER</a></li>
+    <li><a href="/chosenSemester/8" value="VIII SEMESTER">VIII SEMESTER</a></li>
+  </ul>
+<!-- <div class="dropdown">
 
 <button onclick="myFunction()" class="dropbtn">CHOOSE SEMESTER</button>
 
@@ -54,10 +79,11 @@
     <a href="/chosenSemester/8" value="VIII SEMESTER">VIII SEMESTER</a>
 
   </div>
-</div>
+</div> -->
 
 
 <script>
+ $('.dropdown-button').dropdown('close');
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
 function myFunction() {
