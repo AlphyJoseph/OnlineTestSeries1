@@ -23,6 +23,14 @@
       </div>
       <div class="footer"><a href="#">Forgot your password?</a></div>
     </form>
+    <br>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <strong>{{ message }}</strong>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
   </div>
 
   <div class="card alt">
@@ -44,7 +52,9 @@
       <div class="button-container">
         <button type="submit"><span>Register</span></button>
       </div>
+
     </form>
+
   </div>
 </div>
 <!-- <div class="container">
@@ -68,12 +78,5 @@
         </div>
     </div>
 </div> -->
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    {% for message in messages %}
-      <strong>{{ message }}</strong>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
 
 {% endblock %}
