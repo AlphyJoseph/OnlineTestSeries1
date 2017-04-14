@@ -67,7 +67,7 @@ def chosenSemester(sem):
 
     
   if not session.get('logged_in'):
-	return render_template('register.html')
+	return render_template('index.html')
   else:
 	return render_template('subjects.html',subjects=subjects_list, sem = sem)
 
@@ -83,9 +83,9 @@ def chosenSubject(sem, subject):
 
 
 	if not session.get('logged_in'):
-	return render_template('register.html')
-  else:
-	return render_template('subjects.html',subjects=subjects_list, chosenSubject=subject, sem=sem, questions=questions_list)
+		return render_template('index.html')
+	else:
+		return render_template('subjects.html',subjects=subjects_list, chosenSubject=subject, sem=sem, questions=questions_list)
 
 
 ####################################################################################################
@@ -93,7 +93,7 @@ def chosenSubject(sem, subject):
 @app.route('/registerScreen')
 def registerScreen():
 	if not session.get('logged_in'):
-		return render_template('register.html')
+		return render_template('index.html')
 	else:
 		return render_template('LIST.html')
 
