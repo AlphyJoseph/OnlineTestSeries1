@@ -81,10 +81,12 @@ def chosenSubject(sem, subject):
 
 	questions_list = []
 	for ques in all_questions:
-			questions_list.append(ques.que)
-			questions_list.append(ques.op1)
-			questions_list.append(ques.op2)
-			questions_list.append(ques.op3)
+		question = []
+		question.append(ques.que)
+		question.append(ques.op1)
+		question.append(ques.op2)
+		question.append(ques.op3)
+		questions_list.append(question)
 
 	subs = DBsession.query(Semester).filter(Semester.sem.in_([sem]))
   	subjects = subs.first()
