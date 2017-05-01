@@ -77,15 +77,15 @@ def chosenSemester(sem):
 def chosenSubject(sem, subject):
 	DBsession = Session()
 	quest = DBsession.query(Subjects).filter(Subjects.sub.in_([subject]))
-	questions = ques.first()
+	questions = quest.first()
 
-	questions_list = quest.ques.op1.op2.op3
-
+	questions_list = questions.que.op1.op2.op3
+	questions_list = json.dumps(questions_list)
 
 	if not session.get('logged_in'):
 		return render_template('index.html')
 	else:
-		return render_template('subjects.html',subjects=subjects_list, chosenSubject=subject, sem=sem, questions=questions_list)
+		return render_template('subjects.html',subjects=subjects_list, chosenSubject=subject, sem=sem, Question=questions_list)
 
 
 ####################################################################################################
