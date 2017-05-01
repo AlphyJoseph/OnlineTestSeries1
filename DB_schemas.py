@@ -36,7 +36,6 @@ class Subjects(Base):
 	ans = Column(String)
 
 	def __init__(self, qno, sub, que, op1, op2, op3, ans):
-
 		self.qno = qno
 		self.sub = sub
 		self.que = que
