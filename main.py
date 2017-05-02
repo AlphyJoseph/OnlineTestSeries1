@@ -102,7 +102,7 @@ def chosenSubject(sem, subject):
 		#########################################################################################################
 
 @app.route('/submit/<int:sem>/<string:subject>', methods=['POST'])
-def checkAnswer():
+def checkAnswer(sem,subject):
 	DBsession = Session()
 	quest = DBsession.query(Subjects).filter(Subjects.sub.in_([subject]))
 	all_questions = quest.all()
@@ -110,18 +110,13 @@ def checkAnswer():
 
 	for que in all_questions:
 		if request.method=='POST':
-		ANS = str(request.form["choice"])
-
+			ANS = str(request.form["choice"])
 		if(que.ans == ANS):
-			score++
-    if not session.get('logged_in'):
-		return render_template('index.html')
-	else:
-		return render_template('subjects.html',score=score)
+			score = score+1
+		
+	return render_template('subjects.html',score=score)
 
-	
-
-####################################################################################################
+	####################################################################################################
 
 @app.route('/registerScreen')
 def registerScreen():
