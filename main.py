@@ -102,32 +102,15 @@ def chosenSubject(sem, subject):
 		#########################################################################################################
 
 @app.route('/submit/<int:sem>/<string:subject>', methods=['POST'])
-def checkAnswer(sem, subject):
+def checkAnswer():
+	if request.method=='POST':
+		ANS = str(request.form["choice"])
 
 	DBsession = Session()
 	quest = DBsession.query(Subjects).filter(Subjects.sub.in_([subject]))
 	all_questions = quest.all()
 
-	questions_list = []
-	for ques in all_questions:
-		question = []
-		question.append(ques.que)
-		question.append(ques.op1)
-		question.append(ques.op2)
-		question.append(ques.op3)
-		questions_list.append(question)
-
-	subs = DBsession.query(Semester).filter(Semester.sem.in_([sem]))
-  	subjects = subs.first()
- 
-
-  	subjects_list = subjects.subjects.split(',')
-
-	if not session.get('logged_in'):
-		return render_template('index.html')
-	else:
-		return render_template('subjects.html',subjects=subjects_list, chosenSubject=subject, sem=sem, Question=questions_list)
-
+	
 
 ####################################################################################################
 
