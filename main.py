@@ -111,7 +111,7 @@ def checkAnswer(subject):
 		
 
 	for que in all_questions:
-		answer = request.form[que[0]]
+		answer = request.form[que.que]
 		if(que.ans == answer):
 			score = score+1
 		
