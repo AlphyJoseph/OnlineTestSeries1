@@ -101,20 +101,21 @@ def chosenSubject(sem, subject):
 
 		#########################################################################################################
 
-@app.route('/submit/<int:sem>/<string:subject>', methods=['POST'])
-def checkAnswer(sem,subject):
+@app.route('/submit/<string:subject>', methods=['POST'])
+def checkAnswer(subject):
 	DBsession = Session()
 	quest = DBsession.query(Subjects).filter(Subjects.sub.in_([subject]))
 	all_questions = quest.all()
-	score=0;
+	#global answer
+	score=0
+		
 
 	for que in all_questions:
-		if request.method=='POST':
-			ANS = str(request.form["choice"])
-		if(que.ans == ANS):
+		answer = request.form[que[0]]
+		if(que.ans == answer):
 			score = score+1
 		
-	return render_template('subjects.html',score=score)
+	return '<h1><center>Your score is : '+str(score)+'</center></h1>'
 
 	####################################################################################################
 
