@@ -5,7 +5,7 @@ import hashlib, uuid
 import os
 
 #Connecting to the database
-engine = create_engine('sqlite:///onlineTestSeries.db', echo=False)
+engine = create_engine('sqlite:///onlineTestSeries.db', echo=True)
 Session = sessionmaker(bind=engine)
 
 app = Flask(__name__)
@@ -114,6 +114,12 @@ def checkAnswer(subject):
 		answer = request.form[que.que]
 		if(que.ans == answer):
 			score = score+1
+
+	data = {}
+	data['subject'] = 'score'
+	json_data = json.dumps(data)
+
+	
 		
 	return '<h1><center>Your score is : '+str(score)+'</center></h1>'
 
